@@ -1,0 +1,28 @@
+name: skillpath_portal_flutter
+description: "SkillPath Family Counselling Portal - AI-enabled career counselling & family decision-support platform for vocational education (MSDE) powered by Google Gemini"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.2.0
+  shared_preferences: ^2.2.2
+  intl: ^0.19.0
+  flutter_tts: ^4.0.2
+  csv: ^6.0.0
+  path_provider: ^2.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/config.json
+    - assets/knowledge/

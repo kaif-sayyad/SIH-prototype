@@ -1,0 +1,7 @@
+config.json
+node_modules/
+.next/
+.pglite_db/
+*.log
+.env
+.env.local

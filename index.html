@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SkillPath Family Counselling Portal</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== Government-style header ===== -->
+<div class="topstrip">
+  <span>Prototype · Skill Development &amp; Vocational Education Scheme</span>
+  <span class="topstrip-right">
+    <a href="#" onclick="setLang('en');return false">English</a> |
+    <a href="#" onclick="setLang('mr');return false">मराठी</a> |
+    <a href="#" onclick="document.body.classList.toggle('big');return false">A+</a>
+  </span>
+</div>
+<header class="masthead">
+  <div class="logo" aria-hidden="true">SP</div>
+  <div>
+    <h1 data-i18n="title">SkillPath Family Counselling Portal</h1>
+    <p data-i18n="subtitle">Informed career decisions for students and families</p>
+  </div>
+  <div class="userbox" id="userbox" hidden>
+    <span id="userLabel"></span>
+    <button class="btn small" onclick="logout()">Logout</button>
+  </div>
+</header>
+
+<!-- ===== TASK BAR (top) ===== -->
+<nav class="taskbar" id="taskbar" aria-label="Main steps">
+  <button data-go="login"    class="active"><b>1</b> <span data-i18n="nav_login">Login</span></button>
+  <button data-go="student"  disabled><b>2</b> <span data-i18n="nav_student">Student Profile</span></button>
+  <button data-go="family"   disabled><b>3</b> <span data-i18n="nav_family">Family Context</span></button>
+  <button data-go="counsel"  disabled><b>4</b> <span data-i18n="nav_counsel">Counselling</span></button>
+  <button data-go="recs"     disabled><b>5</b> <span data-i18n="nav_recs">Recommendations</span></button>
+  <button data-go="pathway"  disabled><b>6</b> <span data-i18n="nav_pathway">Pathway &amp; Compare</span></button>
+  <button data-go="result"   disabled><b>7</b> <span data-i18n="nav_result">Family Summary</span></button>
+  <button data-go="admin"    class="admin-tab" hidden><span data-i18n="nav_admin">Admin Dashboard</span></button>
+</nav>
+
+<main id="main">
+
+  <!-- 1. AUTHENTICATION -->
+  <section data-page="login">
+    <div class="auth-grid">
+      <div class="panel">
+        <h2>Sign in</h2>
+        <div class="tabs" id="roleTabs">
+          <button class="on" data-role="family">Student / Parent</button>
+          <button data-role="admin">Administrator</button>
+        </div>
+        <form id="loginForm" autocomplete="off">
+          <label>Mobile number
+            <input id="mobile" inputmode="numeric" maxlength="10" placeholder="10-digit mobile number" required>
+          </label>
+          <div class="row">
+            <button type="button" class="btn secondary" id="otpBtn">Send OTP</button>
+            <input id="otp" inputmode="numeric" maxlength="6" placeholder="Enter OTP (demo: 123456)" disabled>
+          </div>
+          <label>Preferred language
+            <select id="langSel"><option value="en">English</option><option value="mr">मराठी (Marathi)</option></select>
+          </label>
+          <label class="check"><input type="checkbox" id="consent" required>
+            I agree to share only the information needed for counselling (see Privacy).</label>
+          <p class="error" id="loginErr" role="alert"></p>
+          <button class="btn primary wide" type="submit">Login &amp; Continue</button>
+        </form>
+        <p class="note">Demo only: no real OTP is sent. Admin demo password: <code>admin123</code> (enter in OTP box).</p>
+      </div>
+      <div class="panel info">
+        <h2>About this portal</h2>
+        <p>Students and parents decide together. The portal shows verified outcome data on
+        earnings, placement and career growth for vocational trades, so the family can choose with clear information.</p>
+        <ul class="ticks">
+          <li>Family-first counselling</li>
+          <li>Verified data, source and date shown</li>
+          <li>English and Marathi, voice support</li>
+          <li>Human counsellor when AI is unsure</li>
+        </ul>
+        <div class="callout">We never invent figures. If data is missing, we say so.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. STUDENT PROFILE -->
+  <section data-page="student" hidden>
+    <div class="panel">
+      <h2>Student information</h2>
+      <form class="grid2" data-next="family">
+        <label>Student name <input id="sName" required></label>
+        <label>Education completed
+          <select id="sEdu"><option>8th</option><option selected>10th</option><option>12th</option></select></label>
+        <label>Location
+          <select id="sLoc"><option>Nagpur</option><option>Pune</option><option>Mumbai</option></select></label>
+        <label>Interest area
+          <select id="sInterest">
+            <option value="electrical">Electrical / Power</option>
+            <option value="solar">Solar / Renewable energy</option>
+            <option value="machining">Machines / Manufacturing</option>
+            <option value="plumbing">Plumbing / Construction</option>
+            <option value="welding">Welding / Fabrication</option>
+            <option value="auto">Vehicles / Automobile</option>
+          </select></label>
+        <label>Preferred training duration
+          <select id="sMonths"><option value="6">Up to 6 months</option><option value="12" selected>Up to 12 months</option><option value="24">Up to 24 months</option></select></label>
+        <label>Career goal <input id="sGoal" placeholder="e.g. steady job, own business"></label>
+        <div class="actions full"><button class="btn primary" type="submit">Save &amp; Continue</button></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- 3. FAMILY CONTEXT -->
+  <section data-page="family" hidden>
+    <div class="panel">
+      <h2>Family context</h2>
+      <form class="grid2" data-next="counsel">
+        <label>Household income bracket
+          <select id="fIncome"><option>Below ₹1 lakh / year</option><option>₹1–3 lakh / year</option><option>₹3–6 lakh / year</option><option>Above ₹6 lakh / year</option></select></label>
+        <label>Preferred career stability
+          <select id="fStable"><option>Government / permanent job</option><option>Private company job</option><option>Own work / business</option><option>No preference</option></select></label>
+        <label>Education expectation
+          <select id="fEdu"><option>Student should continue to a degree</option><option>Diploma is acceptable</option><option>Skill course is acceptable</option></select></label>
+        <label>Location requirement
+          <select id="fLocReq"><option>Must stay in home city</option><option>Within the state</option><option>Anywhere in India</option></select></label>
+        <fieldset class="full"><legend>Parent's main concerns (choose all that apply)</legend>
+          <div class="chips" id="fConcerns"></div></fieldset>
+        <div class="actions full"><button class="btn primary" type="submit">Start Counselling</button></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- 4. COUNSELLING -->
+  <section data-page="counsel" hidden>
+    <div class="panel">
+      <h2>Counselling: what worries the family most?</h2>
+      <p>Tap a concern to see verified data. You can also ask the assistant at the bottom of the screen.</p>
+      <div class="chips big" id="counselChips"></div>
+      <div id="concernAnswer" class="answer" hidden></div>
+      <div class="actions"><button class="btn primary" data-go="recs">See Recommendations</button></div>
+    </div>
+  </section>
+
+  <!-- 5. RECOMMENDATIONS -->
+  <section data-page="recs" hidden>
+    <div class="panel">
+      <h2>Recommended pathways</h2>
+      <p id="recsIntro"></p>
+      <div id="recCards" class="cards"></div>
+      <div class="actions"><button class="btn primary" data-go="pathway">Explain Pathway &amp; Compare</button></div>
+    </div>
+  </section>
+
+  <!-- 6. PATHWAY + COMPARISON -->
+  <section data-page="pathway" hidden>
+    <div class="panel">
+      <h2>Career pathway</h2>
+      <div class="tabs" id="pathTabs"></div>
+      <ol class="steps" id="pathSteps"></ol>
+      <p><b>Further education:</b> <span id="pathFurther"></span></p>
+    </div>
+    <div class="panel">
+      <h2>Vocational vs academic pathway</h2>
+      <p class="note">Neutral comparison. Neither path is called better.</p>
+      <table class="tbl">
+        <thead><tr><th>Factor</th><th>Vocational path</th><th>Academic path</th></tr></thead>
+        <tbody id="cmpBody"></tbody>
+      </table>
+      <div class="actions"><button class="btn primary" data-go="result">Generate Family Summary</button></div>
+    </div>
+  </section>
+
+  <!-- 7. RESULT -->
+  <section data-page="result" hidden>
+    <div class="panel result" id="resultPanel">
+      <h2>Family career discussion summary</h2>
+      <div id="resultBody"></div>
+      <div class="actions">
+        <button class="btn primary" onclick="window.print()">Print / Save as PDF</button>
+        <button class="btn secondary" id="escBtn">Talk to a human counsellor</button>
+      </div>
+      <p id="escMsg" class="callout" hidden>Request sent (demo). A counsellor will contact you.</p>
+    </div>
+  </section>
+
+  <!-- ADMIN -->
+  <section data-page="admin" hidden>
+    <div class="panel">
+      <h2>Administrator dashboard <span class="tag">aggregated data only</span></h2>
+      <div class="stats" id="adminStats"></div>
+      <h3>Parent concerns</h3>
+      <div id="adminBars"></div>
+      <h3>Concerns by district</h3>
+      <table class="tbl"><thead><tr><th>District</th><th>Top concern</th><th>Second concern</th><th>Families</th></tr></thead>
+      <tbody id="adminLoc"></tbody></table>
+      <p class="note">Individual conversations are never shown here. Figures are demo values.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div>Privacy Policy · Terms of Use · Accessibility · Help · Contact</div>
+  <div>Prototype for demonstration. All figures are illustrative dummy data.</div>
+</footer>
+
+<!-- ===== AI BOT (bottom middle) ===== -->
+<div class="bot" id="bot">
+  <button class="bot-bar" id="botToggle" aria-expanded="false">
+    <span class="bot-dot"></span> <span data-i18n="bot_title">Ask the AI Counsellor</span> <span class="chev">▲</span>
+  </button>
+  <div class="bot-panel" id="botPanel" hidden>
+    <div class="bot-log" id="botLog" aria-live="polite"></div>
+    <div class="bot-chips" id="botChips"></div>
+    <form class="bot-form" id="botForm">
+      <button type="button" class="btn small" id="micBtn" title="Voice input">🎤</button>
+      <input id="botInput" placeholder="Type your question…" autocomplete="off">
+      <button class="btn primary small" type="submit">Send</button>
+    </form>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
