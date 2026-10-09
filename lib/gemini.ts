@@ -8,7 +8,7 @@ export function getGeminiClient(): GoogleGenAI | null {
 }
 
 export function getGeminiModelName(): string {
-  return getConfig().GEMINI_MODEL || 'gemini-2.5-flash';
+  return getConfig().GEMINI_MODEL || 'gemini-3.8-flash';
 }
 
 export function getGeminiEmbeddingModelName(): string {

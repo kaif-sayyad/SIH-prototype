@@ -13,7 +13,7 @@ export interface AppConfig {
 
 const DEFAULT_CONFIG: AppConfig = {
   GEMINI_API_KEY: 'PASTE_YOUR_GEMINI_API_KEY_HERE',
-  GEMINI_MODEL: 'gemini-2.5-flash',
+  GEMINI_MODEL: 'gemini-3.8-flash',
   GEMINI_EMBEDDING_MODEL: 'gemini-embedding-001',
   ADMIN_EMAIL: 'admin@example.com',
   ADMIN_PASSWORD: 'CHANGE_ME',

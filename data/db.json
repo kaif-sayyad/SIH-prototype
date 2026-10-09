@@ -137,7 +137,7 @@
       "consent": true,
       "consent_at": "2026-10-09T09:54:07.427Z",
       "created_at": "2026-10-09T09:54:07.427Z",
-      "failed_attempts": 0,
+      "failed_attempts": 2,
       "locked_until": null
     }
   ],
@@ -522,6 +522,15 @@
       ],
       "created_at": "2026-10-09T10:18:28.302Z",
       "updated_at": "2026-10-09T10:18:28.401Z"
+    },
+    {
+      "id": "test_sess_mr",
+      "user_id": null,
+      "student_profile": {},
+      "family_context": {},
+      "status": "active",
+      "created_at": "2026-10-09T16:15:59.846Z",
+      "updated_at": "2026-10-09T16:15:59.848Z"
     }
   ],
   "concerns": [
@@ -628,6 +637,15 @@
       "status": "unresolved",
       "asked_at": "2026-10-09T10:17:58.076Z",
       "resolved_at": null,
+      "evidence_used": {}
+    },
+    {
+      "id": "c_1791562559891_q7e0",
+      "session_id": "test_sess_mr",
+      "category": "income",
+      "status": "resolved",
+      "asked_at": "2026-10-09T16:15:59.891Z",
+      "resolved_at": "2026-10-09T16:15:59.891Z",
       "evidence_used": {}
     }
   ],
